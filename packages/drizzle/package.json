@@ -1,0 +1,28 @@
+{
+  "name": "@chat/drizzle",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "source": "src/index.ts",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "studio": "pnpm drizzle-kit studio --port 3090",
+    "drizzle:push": "npx drizzle-kit push:pg",
+    "main:generate": "drizzle-kit generate:pg --schema ./src/schema/main.ts --out=./src/migrations",
+    "main:migrate": "pnpm tsx ./src/migrate.ts",
+    "build": "tsc -p .",
+    "start": "node dist/index"
+  },
+  "exports": {
+    ".": "./dist/src/index.js"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "drizzle-kit": "^0.20.14",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "drizzle-orm": "^0.29.4",
+    "pg": "^8.11.3",
+    "postgres": "^3.4.3"
+  }
+}
