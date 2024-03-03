@@ -1,6 +1,7 @@
 {
   "name": "@chat/drizzle",
   "version": "1.0.0",
+  "private": true,
   "main": "dist/index.js",
   "source": "src/index.ts",
   "types": "dist/index.d.ts",

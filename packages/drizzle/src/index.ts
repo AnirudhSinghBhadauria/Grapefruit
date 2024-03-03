@@ -9,3 +9,5 @@ export * from "./types";
 
 // Database type
 export { type PostgresJsDatabase } from "drizzle-orm/postgres-js";
+export { asc, desc, eq } from "drizzle-orm";
+

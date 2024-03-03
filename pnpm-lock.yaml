@@ -26,9 +26,6 @@ importers:
       '@chat/drizzle':
         specifier: workspace:*
         version: link:../../packages/drizzle
-      '@chat/logger':
-        specifier: workspace:*
-        version: link:../../packages/logger
       express:
         specifier: ^4.18.3
         version: 4.18.3
