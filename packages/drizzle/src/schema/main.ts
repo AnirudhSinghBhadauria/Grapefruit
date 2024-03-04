@@ -1,13 +1,14 @@
-import { integer, pgTable, serial, text, varchar } from "drizzle-orm/pg-core";
+import { integer, pgTable, text, varchar } from "drizzle-orm/pg-core";
 
 export const userRelation = pgTable("users", {
-  id: serial("id").primaryKey(),
-  fullName: text("full_name"),
+  id: integer("id").primaryKey().unique(),
+  firstName: text("firstName"),
+  lastName: text("lastName"),
   phone: varchar("phone", { length: 256 }),
 });
 
 export const petsRelation = pgTable("pets", {
-  id: serial("id").primaryKey(),
+  id: integer("id").primaryKey().unique(),
   name: text("name").notNull(),
   ownerId: integer("owner_id")
     .notNull()

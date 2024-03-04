@@ -6,19 +6,20 @@
   "source": "src/index.ts",
   "types": "dist/index.d.ts",
   "scripts": {
-    "studio": "pnpm drizzle-kit studio --port 3090",
+    "studio": "pnpm drizzle-kit studio --port 3091",
     "drizzle:push": "npx drizzle-kit push:pg",
-    "main:generate": "drizzle-kit generate:pg --schema ./src/schema/main.ts --out=./src/migrations",
-    "main:migrate": "node dist/src/migrate.js",
+    "main:generate": "dotenv drizzle-kit generate:pg --schema ./src/schema/main.ts --out=./src/migrations",
+    "main:migrate": "dotenv npx tsx ./src/migrate.ts",
     "build": "tsc -p .",
-    "start": "node dotenv/config dist/src/index"
+    "start": "dotenv node dist/src/index"
   },
   "exports": {
     ".": "./dist/src/index.js"
   },
   "license": "ISC",
   "devDependencies": {
-    "dotenv": "^16.4.5",
+    "@types/pg": "^8.11.2",
+    "dotenv-cli": "^7.3.0",
     "drizzle-kit": "^0.20.14",
     "typescript": "^5.3.3"
   },
