@@ -45,6 +45,9 @@ importers:
 
   apps/web:
     dependencies:
+      '@chat/drizzle':
+        specifier: workspace:*
+        version: link:../../packages/drizzle
       '@repo/ui':
         specifier: workspace:*
         version: link:../../packages/ui
@@ -98,6 +101,9 @@ importers:
         specifier: ^3.4.3
         version: 3.4.3
     devDependencies:
+      dotenv:
+        specifier: ^16.4.5
+        version: 16.4.5
       drizzle-kit:
         specifier: ^0.20.14
         version: 0.20.14
@@ -125,12 +131,6 @@ importers:
       eslint-plugin-only-warn:
         specifier: ^1.1.0
         version: 1.1.0
-      typescript:
-        specifier: ^5.3.3
-        version: 5.3.3
-
-  packages/logger:
-    devDependencies:
       typescript:
         specifier: ^5.3.3
         version: 5.3.3
@@ -6043,6 +6043,7 @@ packages:
   /which@2.0.2:
     resolution: {integrity: sha512-BLI3Tl1TW3Pvl70l3yq3Y64i+awpwXqsGBYWkkqMtnbXgrMD+yj7rhW0kuEDxzJaYXGjEW5ogapKNMEKNMjibA==}
     engines: {node: '>= 8'}
+    hasBin: true
     dependencies:
       isexe: 2.0.0
     dev: true

@@ -9,15 +9,16 @@
     "studio": "pnpm drizzle-kit studio --port 3090",
     "drizzle:push": "npx drizzle-kit push:pg",
     "main:generate": "drizzle-kit generate:pg --schema ./src/schema/main.ts --out=./src/migrations",
-    "main:migrate": "pnpm tsx ./src/migrate.ts",
+    "main:migrate": "node dist/src/migrate.js",
     "build": "tsc -p .",
-    "start": "node dist/index"
+    "start": "node dotenv/config dist/src/index"
   },
   "exports": {
     ".": "./dist/src/index.js"
   },
   "license": "ISC",
   "devDependencies": {
+    "dotenv": "^16.4.5",
     "drizzle-kit": "^0.20.14",
     "typescript": "^5.3.3"
   },
