@@ -7,8 +7,7 @@ const port = process.env.PORT || 3009;
 
 app.get("/", async (req, res) => {
   // Get all Users
-
-  // const results = await db.query.userRelation.findMany()
+  const results = await db.query.userRelation.findMany();
 
   // Get user orderby
   // const results = await db.query.userRelation.findMany({
@@ -21,16 +20,16 @@ app.get("/", async (req, res) => {
   // });
 
   // Find pets of particular user!
-  const results = await db
-    .select({
-      firstName: userRelation.firstName,
-      lastName: userRelation.lastName,
-      phone: userRelation.phone,
-      petName: petsRelation.name,
-    })
-    .from(petsRelation)
-    .innerJoin(userRelation, eq(petsRelation.ownerId, userRelation.id))
-    .where(eq(userRelation.id, 1));
+  // const results = await db
+  //   .select({
+  //     fullName: userRelation.firstName,
+  //     lastName: userRelation.lastName,
+  //     phone: userRelation.phone,
+  //     petName: petsRelation.name,
+  //   })
+  //   .from(petsRelation)
+  //   .innerJoin(userRelation, eq(petsRelation.ownerId, userRelation.id))
+  //   .where(eq(userRelation.id, 1));
 
   // const results = await db
   //   .insert(petsRelation)
