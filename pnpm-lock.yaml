@@ -26,6 +26,9 @@ importers:
       '@chat/drizzle':
         specifier: workspace:*
         version: link:../../packages/drizzle
+      '@chat/trpc':
+        specifier: workspace:*
+        version: link:../../packages/trpc
       express:
         specifier: ^4.18.3
         version: 4.18.3
@@ -140,13 +143,16 @@ importers:
 
   packages/trpc:
     dependencies:
+      '@chat/drizzle':
+        specifier: workspace:*
+        version: link:../drizzle
       '@trpc/server':
         specifier: 11.0.0-next-beta.316
         version: 11.0.0-next-beta.316
-      zod:
-        specifier: ^3.22.4
-        version: 3.22.4
     devDependencies:
+      '@types/express':
+        specifier: ^4.17.21
+        version: 4.17.21
       typescript:
         specifier: ^5.4.2
         version: 5.4.2
@@ -6175,3 +6181,4 @@ packages:
 
   /zod@3.22.4:
     resolution: {integrity: sha512-iC+8Io04lddc+mVqQ9AZ7OQ2MrUKGN+oIQyq1vemgt46jwCwLfhq7/pwnBnNXXXZb8VTVLKwp9EDkx+ryxIWmg==}
+    dev: true

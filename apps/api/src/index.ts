@@ -1,9 +1,13 @@
 import { config } from "dotenv";
 import express from "express";
 import { db, userRelation, asc, petsRelation, eq } from "@chat/drizzle";
+import { trpcExpress } from "@chat/trpc";
 
 const app = express();
 const port = process.env.PORT || 3009;
+
+// trpc injector
+app.use("./trpc", trpcExpress);
 
 app.get("/", async (req, res) => {
   // Get all Users
@@ -34,8 +38,6 @@ app.get("/", async (req, res) => {
   // const results = await db
   //   .insert(petsRelation)
   //   .values({ name: "cocker-spaniel", ownerId: 2 });
-
-  // console.log(results);
 
   res.status(200).json(results);
 });

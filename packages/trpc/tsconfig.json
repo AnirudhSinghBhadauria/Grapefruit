@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "es2016",
+    "module": "Node16",
+    "rootDir": "./",
+    "declaration": true,
+    "outDir": "./dist",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "moduleResolution": "Node16"
+  },
+  "include": ["*.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": ["dist", "build", "node_modules"]
+}
