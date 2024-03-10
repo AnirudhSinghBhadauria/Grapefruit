@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@chat/drizzle": "workspace:*",
-    "@chat/trpc": "workspace:*",
+    "@chat/trpc-server": "workspace:*",
     "express": "^4.18.3"
   }
 }
