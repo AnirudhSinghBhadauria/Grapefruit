@@ -1,0 +1,19 @@
+{
+  "name": "trpc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^5.4.2"
+  },
+  "dependencies": {
+    "@trpc/client": "11.0.0-next-beta.316",
+    "@trpc/server": "11.0.0-next-beta.316"
+  }
+}
