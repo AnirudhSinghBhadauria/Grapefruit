@@ -13,6 +13,7 @@
   "type": "module",
   "devDependencies": {
     "@types/express": "^4.17.21",
+    "@chat/trpc": "workspace:*",
     "dotenv": "^16.4.5",
     "tsc-watch": "^6.0.4",
     "typescript": "^5.3.3"

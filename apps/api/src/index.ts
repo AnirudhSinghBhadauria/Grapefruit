@@ -1,9 +1,12 @@
 import { config } from "dotenv";
 import express from "express";
 import { db, userRelation, asc, petsRelation, eq } from "@chat/drizzle";
+import { appRouter, trpcExpress } from "@chat/trpc/server";
 
 const app = express();
 const port = process.env.PORT || 3009;
+
+app.use('/api/trpc', trpcExpress);
 
 app.get("/", async (req, res) => {
   // Get all Users

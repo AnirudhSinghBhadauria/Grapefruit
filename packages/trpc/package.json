@@ -1,19 +1,25 @@
 {
-  "name": "trpc",
+  "name": "@chat/trpc",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc -p ."
+  },
+  "exports": {
+    "./server": "./dist/src/server/index.js",
+    "./client": "./dist/src/client/index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@chat/drizzle": "workspace:*",
+    "@types/express": "^4.17.21",
     "typescript": "^5.4.2"
   },
   "dependencies": {
     "@trpc/client": "11.0.0-next-beta.316",
-    "@trpc/server": "11.0.0-next-beta.316"
+    "@trpc/server": "11.0.0-next-beta.316",
+    "zod": "^3.22.4"
   }
 }
