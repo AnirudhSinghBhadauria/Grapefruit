@@ -1,8 +1,8 @@
 import { router, publicProcedure } from "../tprc";
 import { db, eq, userRelation, petsRelation, User } from "@chat/drizzle";
 
-export const helloRoute = router({
-  hello: publicProcedure.query(async () => {
+export const userRoute = router({
+  petUsers : publicProcedure.query(async () => {
     const results = await db
       .select({
         fullName: userRelation.firstName,

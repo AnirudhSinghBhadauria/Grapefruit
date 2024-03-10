@@ -2,10 +2,11 @@
 
 import { inferRouterOutputs } from "@trpc/server";
 import { router } from "../tprc";
-import { helloRoute } from "./hello";
+import { userRoute } from "./user";
 
 export const appRouter = router({
-     hello: helloRoute
-})
+  Users: userRoute,
+});
 
-export type AppRouterType = inferRouterOutputs<typeof appRouter>
+export type AppRouter = typeof appRouter;
+export type AppRouterType = inferRouterOutputs<AppRouter>
