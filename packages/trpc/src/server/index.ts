@@ -5,7 +5,5 @@ export const trpcExpress = createExpressMiddleware({
   router: appRouter,
 });
 
-
-
 // Export every route
 export * from "./routers/index";

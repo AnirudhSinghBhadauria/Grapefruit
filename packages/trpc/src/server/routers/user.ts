@@ -15,3 +15,13 @@ export const userRoute = router({
       .where(eq(userRelation.id, 1))
   ),
 });
+
+// export const userRoute = router({
+//   petUsers: publicProcedure.query(() => {
+//     return {
+//       name: "anirudh singh bhadauria",
+//       age: 22,
+//       index: 1,
+//     };
+//   }),
+// });
