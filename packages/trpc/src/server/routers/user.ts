@@ -2,8 +2,8 @@ import { router, publicProcedure } from "../trpc";
 import { db, eq, userRelation, petsRelation, User } from "@chat/drizzle";
 
 export const userRoute = router({
-  petUsers : publicProcedure.query(async () => {
-    const results = await db
+  petUsers: publicProcedure.query(() =>
+    db
       .select({
         fullName: userRelation.firstName,
         lastName: userRelation.lastName,
@@ -12,8 +12,6 @@ export const userRoute = router({
       })
       .from(petsRelation)
       .innerJoin(userRelation, eq(petsRelation.ownerId, userRelation.id))
-      .where(eq(userRelation.id, 1));
-
-    return results;
-  }),
+      .where(eq(userRelation.id, 1))
+  ),
 });

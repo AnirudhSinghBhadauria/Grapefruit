@@ -7,7 +7,7 @@
   },
   "exports": {
     "./server": "./dist/src/server/index.js",
-    "./client": "./dist/src/client/index.js"
+    "./client": "./src/client/index.ts"
   },
   "keywords": [],
   "author": "",
@@ -15,6 +15,9 @@
   "devDependencies": {
     "@chat/drizzle": "workspace:*",
     "@types/express": "^4.17.21",
+    "@types/react": "^18.2.46",
+    "next": "^14.0.4",
+    "react": "^18.2.0",
     "typescript": "^5.4.2"
   },
   "dependencies": {
@@ -24,5 +27,9 @@
     "@trpc/react-query": "11.0.0-next-beta.316",
     "@trpc/server": "11.0.0-next-beta.316",
     "zod": "^3.22.4"
+  },
+  "peerDependencies": {
+    "next": "^14.0.4",
+    "react": "^18.2.0"
   }
 }

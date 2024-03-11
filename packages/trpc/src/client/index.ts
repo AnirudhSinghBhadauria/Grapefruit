@@ -5,4 +5,7 @@ export const trpc = createTRPCClient<AppRouter>({
   links: [httpBatchLink({ url: "http:localhost:8080/trpc" })],
 });
 
-// const users = trpc.Users.petUsers.query();
+export * from "./client";
+export * from "./trpc-provider";
+
+// const users = trpc.Users.petUsers.query()

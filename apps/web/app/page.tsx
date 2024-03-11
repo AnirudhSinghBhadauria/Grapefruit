@@ -1,33 +1,11 @@
 import React from "react";
-
-interface UserInfo {
-  fullName: string;
-  lastName: string;
-  phone: number;
-  petName: string;
-}
+import { trpc } from "@chat/trpc/client";
 
 const Home = async () => {
-  const results = await fetch("http://localhost:8080");
-  const res = await results.json();
+  const users = await trpc.Users.petUsers.query();
+  console.log(JSON.stringify(users));
 
-  return res.map(
-    ({
-      fullName,
-      lastName,
-      phone,
-      petName,
-    }: UserInfo) => {
-      return (
-        <div>
-          <span>{fullName}</span> &nbsp;
-          <span>{lastName}</span>&nbsp;
-          <span>{phone}</span>&nbsp;
-          <span>{petName}</span>
-        </div>
-      );
-    }
-  );
+  return <div></div>;
 };
 
 export default Home;
