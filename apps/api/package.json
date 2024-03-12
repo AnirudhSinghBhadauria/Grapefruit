@@ -5,7 +5,7 @@
   "scripts": {
     "build": "tsc -p .",
     "dev": "tsc-watch --onSuccess \"node -r dotenv/config dist/index.js\"",
-    "start": "node dist/index"
+    "start": "node -r dotenv/config dist/index.js"
   },
   "keywords": [],
   "author": "",

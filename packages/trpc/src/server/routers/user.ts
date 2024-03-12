@@ -13,5 +13,15 @@ export const userRoute = router({
       .from(petsRelation)
       .innerJoin(userRelation, eq(petsRelation.ownerId, userRelation.id))
       .where(eq(userRelation.id, 1))
-  )
+  ),
+
+  userInfo: publicProcedure.query(({ ctx }) => {
+    const { email, username } = ctx;
+
+    return {
+      username,
+      email,
+    };
+  }),
+
 });
