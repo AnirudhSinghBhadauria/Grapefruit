@@ -10,17 +10,19 @@
     "drizzle:push": "npx drizzle-kit push:pg",
     "main:generate": "dotenv drizzle-kit generate:pg --schema ./src/schema/main.ts --out=./src/migrations",
     "main:migrate": "dotenv npx tsx ./src/migrate.ts",
-    "build": "tsc -p .",
-    "start": "dotenv node dist/src/index"
+    "build": "tsup src/index.ts --format cjs --dts",
+    "start": "dotenv node dist/index",
+    "dev": "npm run build -- --watch"
   },
   "exports": {
-    ".": "./dist/src/index.js"
+    ".": "./dist/index.js"
   },
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@types/pg": "^8.11.2",
     "dotenv-cli": "^7.3.0",
     "drizzle-kit": "^0.20.14",
+    "tsup": "^8.0.2",
     "typescript": "^5.3.3"
   },
   "dependencies": {

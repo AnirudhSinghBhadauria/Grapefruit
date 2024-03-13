@@ -4,10 +4,6 @@ export * from "./client";
 // Database Schema
 export * from "./schema/main";
 
-// Infer types
-export * from "./types";
-
 // Database type
-export { type PostgresJsDatabase } from "drizzle-orm/postgres-js";
-export { asc, desc, eq } from "drizzle-orm";
+export { asc, desc, eq, InferInsertModel, InferSelectModel } from "drizzle-orm";
 

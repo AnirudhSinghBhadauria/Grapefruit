@@ -1,0 +1,24 @@
+{
+  "name": "@chat/types",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "build": "tsup src/index.ts src/schema/index.ts --format cjs --dts",
+    "dev": "npm run build -- --watch"
+  },
+  "exports": {
+    ".": "./dist/index.js",
+    "./schema": "./dist/schema/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "tsup": "^8.0.2",
+    "typescript": "^5.4.2"
+  },
+  "dependencies": {
+    "@chat/drizzle": "workspace:*",
+    "zod": "^3.22.4"
+  }
+}

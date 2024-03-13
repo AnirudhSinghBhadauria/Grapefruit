@@ -1,33 +1,25 @@
 import React from "react";
-
-interface UserInfo {
-  fullName: string;
-  lastName: string;
-  phone: number;
-  petName: string;
-}
+import { UserPets } from "@chat/types";
+import { env } from "node:process";
 
 const Home = async () => {
-  const results = await fetch("http://localhost:8080");
-  const res = await results.json();
+  const results = await fetch(env.CONNECT_URL!);
+  const res: UserPets = await results.json();
 
-  return res.map(
-    ({
-      fullName,
-      lastName,
-      phone,
-      petName,
-    }: UserInfo) => {
-      return (
-        <div>
-          <span>{fullName}</span> &nbsp;
-          <span>{lastName}</span>&nbsp;
-          <span>{phone}</span>&nbsp;
-          <span>{petName}</span>
-        </div>
-      );
-    }
-  );
+  if (UserPets.parse(res)) {
+    console.log("Its the right type!");
+  }
+
+  return res.map(({ fullName, lastName, petName, phone }) => {
+    return (
+      <div>
+        <span>{fullName}</span> &nbsp;
+        <span>{lastName}</span>&nbsp;
+        <span>{phone}</span>&nbsp;
+        <span>{petName}</span>
+      </div>
+    );
+  });
 };
 
 export default Home;
