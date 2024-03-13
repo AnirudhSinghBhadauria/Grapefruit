@@ -2,6 +2,7 @@ import { router, publicProcedure } from "../trpc";
 import { db, eq, asc, userRelation, petsRelation } from "@chat/drizzle";
 
 export const userRoute = router({
+
   petUsers: publicProcedure.query(() =>
     db
       .select({
@@ -17,7 +18,6 @@ export const userRoute = router({
 
   userInfo: publicProcedure.query(({ ctx }) => {
     const { email, username } = ctx;
-
     return {
       username,
       email,

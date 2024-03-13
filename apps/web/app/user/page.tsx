@@ -9,7 +9,8 @@ const User = () => {
   return (
     <div>
       <div>{isLoading ? "loading..." : data!.email}</div>
-      <Link href="/">Home</Link>
+      <br />
+      <Link style={{textDecoration: "none"}} href="/">Home</Link>
     </div>
   );
 };

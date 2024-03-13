@@ -18,7 +18,8 @@ const Home = async () => {
           <span key={4}>{phone}</span>
         </div>
       ))}
-      <Link href="/user">User</Link>
+      <br />
+      <Link style={{textDecoration: "none"}} href="/user">User</Link>
     </div>
   );
 };
