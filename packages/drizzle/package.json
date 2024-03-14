@@ -6,7 +6,7 @@
   "source": "src/index.ts",
   "types": "dist/index.d.ts",
   "scripts": {
-    "studio": "pnpm drizzle-kit studio",
+    "studio": "pnpm drizzle-kit studio --port 4092",
     "drizzle:push": "npx drizzle-kit push:pg",
     "main:generate": "dotenv drizzle-kit generate:pg --schema ./src/schema/main.ts --out=./src/migrations",
     "main:migrate": "dotenv npx tsx ./src/migrate.ts",

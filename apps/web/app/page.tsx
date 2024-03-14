@@ -1,25 +1,24 @@
-import React from "react";
-import { UserPets } from "@chat/types";
-import { env } from "node:process";
+import Image from "next/image";
+import { getAllUsers } from "../libs/data/user-data";
 
 const Home = async () => {
-  const results = await fetch(env.CONNECT_URL!);
-  const res: UserPets = await results.json();
+  const { username, displayPicture, createdAt, email } = await getAllUsers();
 
-  if (UserPets.parse(res)) {
-    console.log("Its the right type!");
-  }
+  // console.log(user)
 
-  return res.map(({ fullName, lastName, petName, phone }) => {
-    return (
-      <div>
-        <span>{fullName}</span> &nbsp;
-        <span>{lastName}</span>&nbsp;
-        <span>{phone}</span>&nbsp;
-        <span>{petName}</span>
-      </div>
-    );
-  });
+  return (
+    <div className="h-screen flex flex-col justify-center items-center relative">
+      <Image
+        src={displayPicture}
+        alt="dp"
+        width={100}
+        height={100}
+        className="max-w-11 max-h-11 p-[2px] rounded-full border-white border-2 absolute top-6 right-6"
+      />
+      <p>{username}</p>
+      <p>{email}</p>
+    </div>
+  );
 };
 
 export default Home;

@@ -11,11 +11,13 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "type": "module",
   "devDependencies": {
+    "@types/cookie-parser": "^1.4.7",
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
+    "@types/express-serve-static-core": "^4.17.43",
     "dotenv": "^16.4.5",
     "tsc-watch": "^6.0.4",
     "tsup": "^8.0.2",
@@ -24,6 +26,7 @@
   "dependencies": {
     "@chat/drizzle": "workspace:*",
     "@chat/types": "workspace:*",
+    "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "express": "^4.18.3"
   }

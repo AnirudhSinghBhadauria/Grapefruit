@@ -1,9 +1,88 @@
 {
-  "id": "c27426fd-8f72-4ff7-a98e-09333eb14049",
-  "prevId": "b96adaf4-d845-4e2a-9a58-1ce7687a9056",
+  "id": "dfecbb24-86e8-4813-b3f8-8832098ca687",
+  "prevId": "5dcdbf97-aca2-419d-ae26-0f415bcfe33d",
   "version": "5",
   "dialect": "pg",
-  "tables": {},
+  "tables": {
+    "user": {
+      "name": "user",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "email": {
+          "name": "email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "username": {
+          "name": "username",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "password": {
+          "name": "password",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "displayPicture": {
+          "name": "displayPicture",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'https://res.cloudinary.com/dakfyn60d/image/upload/v1710425369/rcjwpxmtpmvfdu19rda4.jpg'"
+        },
+        "createdAt": {
+          "name": "createdAt",
+          "type": "timestamp(6) with time zone",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updatedAt": {
+          "name": "updatedAt",
+          "type": "timestamp(6) with time zone",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "user_id_unique": {
+          "name": "user_id_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "id"
+          ]
+        },
+        "user_email_unique": {
+          "name": "user_email_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "email"
+          ]
+        },
+        "user_username_unique": {
+          "name": "user_username_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "username"
+          ]
+        }
+      }
+    }
+  },
   "enums": {},
   "schemas": {},
   "_meta": {
