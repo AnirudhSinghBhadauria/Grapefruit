@@ -1,13 +1,14 @@
-class apiError extends Error {
+class apiError {
   statusCode: number;
   error: any;
-  success = false
+  success: boolean;
+  message: string;
 
-  constructor(statusCode: number, error: any) {
-    super();
+  constructor(statusCode: number, error: any, message: string) {
     this.statusCode = statusCode;
     this.error = error;
-    this.success = false
+    this.success = false;
+    this.message = message;
   }
 }
 

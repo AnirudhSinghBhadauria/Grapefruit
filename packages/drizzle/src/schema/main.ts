@@ -18,9 +18,10 @@ const timestamps = {
 // User Relation;
 export const userRelation = pgTable("user", {
   id: uuid("id").unique().primaryKey().defaultRandom(),
-  email: text("email").unique().notNull(),
-  username: text("username").notNull().unique(),
+  email: text("email").unique(),
+  username: text("username").unique().default(""),
   password: text("password").notNull(),
+  refreshToken: text("refershToken"),
   displayPicture: text("displayPicture")
     .default(env.DEFAULT_PROFILE!)
     .notNull(),
