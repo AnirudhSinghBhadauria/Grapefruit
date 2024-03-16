@@ -1,20 +1,73 @@
 import { asyncHandler } from "../utils/async-handeler.js";
 import { apiResponse } from "../utils/api-response.js";
 import { userRelation, db, eq } from "@chat/drizzle";
-import { RegisterInputs } from "@chat/types/schema";
+import { LoginRegisterInputs, UserInfoTypes } from "@chat/types/schema";
 import { HttpStatus } from "../libs/http-codes.js";
 import { apiError } from "../utils/api-error.js";
 import { Request, Response } from "express";
 import becrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import { env } from "process";
 import {
   invalidCredentialsMessage,
+  invalidLoginCredentialsMessage,
+  loggedinSuccesMessage,
+  passwordIncorrectMessage,
+  tokenGenerationErrorMessage,
   userAlreadyExistsMessage,
   userCreatedSuccesfully,
+  userDoesNotExistmessage,
   usernameConflictMessage,
 } from "../libs/error-messages/user.error.js";
+import { cookieOptions } from "../constant.js";
 
+// Generate pass hash
 const generatePassHash = async (value: string) => await becrypt.hash(value, 10);
 
+// Validating Pass
+const isPassCorrect = async (pass: string, hashedPass: string) => {
+  const decodedPass = await becrypt.compare(pass, hashedPass);
+  return decodedPass;
+};
+
+// Generate Access / Refersh token
+const generateRefreshAccessToken = async (userId: string) => {
+  const user = await db
+    .select({
+      id: userRelation.id,
+      username: userRelation.username,
+    })
+    .from(userRelation)
+    .where(eq(userRelation.id, userId));
+
+  const userInfo = user[0];
+
+  const accessToken = await generateAccessToken(userInfo);
+  const refreshToken = await generateRefreshToken(userInfo.id);
+
+  if (!accessToken || !refreshToken)
+    throw new apiError(
+      HttpStatus.INTERNAL_SERVER_ERROR,
+      "Token generation failed",
+      tokenGenerationErrorMessage
+    );
+
+  return { accessToken, refreshToken };
+};
+
+const generateAccessToken = async (userInfo: UserInfoTypes) => {
+  return jwt.sign(userInfo, env.ACCESS_TOKEN_SECRET!, {
+    expiresIn: env.ACCESS_TOKEN_EXPIRATION_TIME!,
+  });
+};
+
+const generateRefreshToken = async (userId: string) => {
+  return jwt.sign({ id: userId }, env.REFRESH_TOKEN_SECRET!, {
+    expiresIn: env.REFRESH_TOKEN_EXPIRATION_TIME!,
+  });
+};
+
+// Users controllers
 const getAllUsers = asyncHandler(async (req: Request, res: Response) => {
   const { email, username, displayPicture, createdAt } = userRelation;
 
@@ -40,7 +93,7 @@ const getAllUsers = asyncHandler(async (req: Request, res: Response) => {
 
 const register = asyncHandler(async (req: Request, res: Response) => {
   // Sanitization
-  const registerInputs = RegisterInputs.safeParse(req.body);
+  const registerInputs = LoginRegisterInputs.safeParse(req.body);
 
   if (!registerInputs.success) {
     throw new apiError(
@@ -131,4 +184,99 @@ const register = asyncHandler(async (req: Request, res: Response) => {
     .json(new apiResponse(HttpStatus.OK, createUser, userCreatedSuccesfully));
 });
 
-export { getAllUsers, register };
+// Login controller
+const login = asyncHandler(async (req: Request, res: Response) => {
+  // Sanitization
+  const loginInputs = LoginRegisterInputs.safeParse(req.body);
+
+  if (!loginInputs.success) {
+    throw new apiError(
+      HttpStatus.BAD_REQUEST,
+      loginInputs.error,
+      invalidLoginCredentialsMessage
+    );
+  }
+
+  // Trimming
+  const username = loginInputs.data.username.split(" ").join("");
+  const pass = loginInputs.data.password.split(" ").join("");
+
+  // console.log(username);
+
+  // Finding user
+  const user = await db
+    .select({
+      id: userRelation.id,
+      password: userRelation.password,
+      username: userRelation.username,
+    })
+    .from(userRelation)
+    .where(eq(userRelation.username, username))
+    .limit(1);
+
+  // const user = await db.query.userRelation.findFirst({
+  //   where: (userRelation, { eq }) => eq(userRelation.username, username),
+  // });
+
+  // console.log(user);
+
+  if (user.length === 0) {
+    throw new apiError(
+      HttpStatus.UNAUTHORIZED,
+      "User does not exist",
+      userDoesNotExistmessage
+    );
+  }
+
+  const userId = user[0].id;
+  const hashedPass = user[0].password;
+  // console.log(userId);
+
+  // Check ifPassword correct
+  const userVerified = await isPassCorrect(pass, hashedPass);
+
+  if (!userVerified)
+    throw new apiError(
+      HttpStatus.UNAUTHORIZED,
+      "Password Incorrect",
+      passwordIncorrectMessage
+    );
+
+  // console.log(userVerified);
+
+  // Generate Refresh and Access token
+  const { accessToken, refreshToken } =
+    await generateRefreshAccessToken(userId);
+
+  if (!accessToken || !refreshToken)
+    throw new apiError(
+      HttpStatus.INTERNAL_SERVER_ERROR,
+      "Token generation failed",
+      tokenGenerationErrorMessage
+    );
+
+  // Saving refresh token
+  const updateUser = await db
+    .update(userRelation)
+    .set({ refreshToken, updatedAt: new Date().toISOString() })
+    .where(eq(userRelation.username, username));
+
+  res
+    .status(HttpStatus.OK)
+    .cookie("accessToken", accessToken, cookieOptions)
+    .cookie("refreshToken", refreshToken, cookieOptions)
+    .json(
+      new apiResponse(
+        HttpStatus.OK,
+        {
+          loggedinUser: user[0],
+          accessToken,
+          refreshToken,
+          message: "Logged in succesfully",
+        },
+        loggedinSuccesMessage
+      )
+    );
+});
+
+export { getAllUsers, register, login };

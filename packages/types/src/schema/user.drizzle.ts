@@ -13,10 +13,10 @@ export const ExposedUserTypes = z.object({
   username: z.string(),
   displayPicture: z.string(),
   createdAt: z.string(),
-  updatedAt : z.string(),
+  updatedAt: z.string(),
 });
 
-export const RegisterInputs = z.object({
+export const LoginRegisterInputs = z.object({
   username: z
     .string()
     .trim()
@@ -29,10 +29,16 @@ export const RegisterInputs = z.object({
     .max(50, { message: "password cannot be more that 35 chars!" }),
 });
 
+export const UserInfoTypes = z.object({
+  id: z.string(),
+  username: z.string().nullable(),
+});
+
 export const userInsertSchema = createInsertSchema(userRelation);
 export const userSelectSchema = createSelectSchema(userRelation);
 
 export type ExposedUserTypes = z.infer<typeof ExposedUserTypes>;
+export type UserInfoTypes = z.infer<typeof UserInfoTypes>;
 
 export type User = InferSelectModel<typeof userRelation>;
 export type newUser = InferInsertModel<typeof userRelation>;
