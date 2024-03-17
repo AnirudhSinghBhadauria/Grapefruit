@@ -16,8 +16,6 @@ export const userAlreadyExistsMessage =
 export const userCreatedSuccesfully =
   "Congratulations! Your user account has been created successfully.";
 
-// Login contoller messages!
-
 //Invalid credentials given
 export const invalidLoginCredentialsMessage =
   "Invalid credentials, Please check your username and password and try again";
@@ -31,7 +29,21 @@ export const passwordIncorrectMessage =
   "Invalid credentials. The password provided for this username is incorrect.";
 
 // Token generation failed
-export const tokenGenerationErrorMessage = "There was an error generating the access token or refresh token. Please try again later."
+export const tokenGenerationErrorMessage =
+  "There was an error generating the access token or refresh token. Please try again later.";
 
 // Succesfull Login
-export const loggedinSuccesMessage = "Congratulations! You have successfully logged in."
+export const loggedinSuccesMessage =
+  "Congratulations! You have successfully logged in.";
+
+// Succesfull Logout
+export const loggedOutMessage =
+  "You have been successfully logged out. Thank you for using our service!";
+
+// Internal server error
+export const internalServerErrorMessage =
+  "Oops, something went wrong! Our team has been notified and we're working to resolve the issue as soon as possible.";
+
+// Auth Middleware
+export const userAuthenticationFailed =
+  "Authentication failed. Please check your username and password and try again";

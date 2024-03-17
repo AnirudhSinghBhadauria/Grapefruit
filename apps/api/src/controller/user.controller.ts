@@ -1,16 +1,18 @@
+import { LoginRegisterInputs, UserInfoTypes } from "@chat/types/schema";
 import { asyncHandler } from "../utils/async-handeler.js";
 import { apiResponse } from "../utils/api-response.js";
 import { userRelation, db, eq } from "@chat/drizzle";
-import { LoginRegisterInputs, UserInfoTypes } from "@chat/types/schema";
 import { HttpStatus } from "../libs/http-codes.js";
 import { apiError } from "../utils/api-error.js";
 import { Request, Response } from "express";
-import becrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { env } from "process";
+import becrypt from "bcrypt";
 import {
+  internalServerErrorMessage,
   invalidCredentialsMessage,
   invalidLoginCredentialsMessage,
+  loggedOutMessage,
   loggedinSuccesMessage,
   passwordIncorrectMessage,
   tokenGenerationErrorMessage,
@@ -20,6 +22,7 @@ import {
   usernameConflictMessage,
 } from "../libs/error-messages/user.error.js";
 import { cookieOptions } from "../constant.js";
+import { CustomRequest } from "../constant.js";
 
 // Generate pass hash
 const generatePassHash = async (value: string) => await becrypt.hash(value, 10);
@@ -279,4 +282,38 @@ const login = asyncHandler(async (req: Request, res: Response) => {
     );
 });
 
-export { getAllUsers, register, login };
+// Logout controller
+const logout = asyncHandler(async (req: CustomRequest, res: Response) => {
+  const loggedInUser = req.user;
+
+  if (!loggedInUser)
+    throw new apiResponse(
+      HttpStatus.INTERNAL_SERVER_ERROR,
+      "Something went wrong",
+      internalServerErrorMessage
+    );
+
+  // Removing the refresh token
+  await db
+    .update(userRelation)
+    .set({ refreshToken: null })
+    .where(eq(userRelation.id, loggedInUser.id))
+    .returning({ id: userRelation.id });
+
+  console.log("refreshToken setted to null");
+
+  // Removing the access and refresh cookies
+  res
+    .status(HttpStatus.OK)
+    .clearCookie("accessToken", cookieOptions)
+    .clearCookie("refrshToken", cookieOptions)
+    .json(
+      new apiResponse(
+        HttpStatus.OK,
+        "Successfully logged out",
+        loggedOutMessage
+      )
+    );
+});
+
+export { getAllUsers, register, login, logout };
