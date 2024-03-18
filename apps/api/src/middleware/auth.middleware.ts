@@ -2,14 +2,14 @@ import { db, eq, userRelation } from "@chat/drizzle";
 import { userAuthenticationFailed } from "../libs/error-messages/user.error.js";
 import { HttpStatus } from "../libs/http-codes.js";
 import { apiError } from "../utils/api-error.js";
-import { Request, Response, NextFunction } from "express";
+import { Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import { env } from "process";
 import { CustomRequest } from "../constant.js";
 
-
 const auth = async (req: CustomRequest, res: Response, next: NextFunction) => {
   try {
+    // Headers for any application
     const token =
       req.cookies?.accessToken || req.header("Authorization")!.split(" ")[0];
 
@@ -20,9 +20,17 @@ const auth = async (req: CustomRequest, res: Response, next: NextFunction) => {
         userAuthenticationFailed
       );
 
-    console.log("Token exists");
+    // console.log("Token exists");
 
     const decodedToken: any = jwt.verify(token, env.ACCESS_TOKEN_SECRET!);
+
+    // decodedToken Type
+    // type DecodedToken = {
+    //   id: string;
+    //   username: string;
+    //   iat: number;
+    //   exp: number;
+    // };
 
     if (!decodedToken)
       throw new apiError(
@@ -31,7 +39,7 @@ const auth = async (req: CustomRequest, res: Response, next: NextFunction) => {
         userAuthenticationFailed
       );
 
-    console.log(decodedToken);
+    // console.log(decodedToken);
 
     const userId = decodedToken?.id;
 
@@ -55,7 +63,7 @@ const auth = async (req: CustomRequest, res: Response, next: NextFunction) => {
         userAuthenticationFailed
       );
 
-    console.log(user);
+    // console.log(user);
 
     const loggedInUser = user[0];
 

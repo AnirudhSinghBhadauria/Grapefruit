@@ -94,6 +94,7 @@ const getAllUsers = asyncHandler(async (req: Request, res: Response) => {
     );
 });
 
+// Register controller
 const register = asyncHandler(async (req: Request, res: Response) => {
   // Sanitization
   const registerInputs = LoginRegisterInputs.safeParse(req.body);
