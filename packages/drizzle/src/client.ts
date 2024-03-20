@@ -8,8 +8,5 @@ export const db: PostgresJsDatabase<typeof mainSchema> = drizzle(
   postgresConnection,
   {
     schema: mainSchema,
-  }
+  },
 );
-
-
-

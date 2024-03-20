@@ -17,7 +17,7 @@ const auth = async (req: CustomRequest, res: Response, next: NextFunction) => {
       throw new apiError(
         HttpStatus.UNAUTHORIZED,
         "Authentication failed",
-        userAuthenticationFailed
+        userAuthenticationFailed,
       );
 
     // console.log("Token exists");
@@ -36,7 +36,7 @@ const auth = async (req: CustomRequest, res: Response, next: NextFunction) => {
       throw new apiError(
         HttpStatus.UNAUTHORIZED,
         "Authentication failed",
-        userAuthenticationFailed
+        userAuthenticationFailed,
       );
 
     // console.log(decodedToken);
@@ -60,7 +60,7 @@ const auth = async (req: CustomRequest, res: Response, next: NextFunction) => {
       throw new apiError(
         HttpStatus.UNAUTHORIZED,
         "Authentication failed",
-        userAuthenticationFailed
+        userAuthenticationFailed,
       );
 
     // console.log(user);
@@ -74,7 +74,7 @@ const auth = async (req: CustomRequest, res: Response, next: NextFunction) => {
     throw new apiError(
       HttpStatus.UNAUTHORIZED,
       "Authentication failed",
-      userAuthenticationFailed
+      userAuthenticationFailed,
     );
   }
 };

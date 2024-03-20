@@ -27,4 +27,3 @@ export const userRelation = pgTable("user", {
     .notNull(),
   ...timestamps,
 });
-

@@ -42,4 +42,3 @@ export type UserInfoTypes = z.infer<typeof UserInfoTypes>;
 
 export type User = InferSelectModel<typeof userRelation>;
 export type newUser = InferInsertModel<typeof userRelation>;
-

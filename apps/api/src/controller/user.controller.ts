@@ -52,7 +52,7 @@ const generateRefreshAccessToken = async (userId: string) => {
     throw new apiError(
       HttpStatus.INTERNAL_SERVER_ERROR,
       "Token generation failed",
-      tokenGenerationErrorMessage
+      tokenGenerationErrorMessage,
     );
 
   return { accessToken, refreshToken };
@@ -89,8 +89,8 @@ const getAllUsers = asyncHandler(async (req: Request, res: Response) => {
       new apiResponse(
         HttpStatus.OK,
         result,
-        "All users extracted successfully!"
-      )
+        "All users extracted successfully!",
+      ),
     );
 });
 
@@ -103,7 +103,7 @@ const register = asyncHandler(async (req: Request, res: Response) => {
     throw new apiError(
       HttpStatus.BAD_REQUEST,
       registerInputs.error,
-      invalidCredentialsMessage
+      invalidCredentialsMessage,
     );
   }
 
@@ -146,7 +146,7 @@ const register = asyncHandler(async (req: Request, res: Response) => {
     throw new apiError(
       HttpStatus.CONFLICT,
       "User already exists",
-      userAlreadyExistsMessage
+      userAlreadyExistsMessage,
     );
   }
 
@@ -155,7 +155,7 @@ const register = asyncHandler(async (req: Request, res: Response) => {
     throw new apiError(
       HttpStatus.CONFLICT,
       "Username conflict",
-      usernameConflictMessage
+      usernameConflictMessage,
     );
 
   // Hashing
@@ -197,7 +197,7 @@ const login = asyncHandler(async (req: Request, res: Response) => {
     throw new apiError(
       HttpStatus.BAD_REQUEST,
       loginInputs.error,
-      invalidLoginCredentialsMessage
+      invalidLoginCredentialsMessage,
     );
   }
 
@@ -228,7 +228,7 @@ const login = asyncHandler(async (req: Request, res: Response) => {
     throw new apiError(
       HttpStatus.UNAUTHORIZED,
       "User does not exist",
-      userDoesNotExistmessage
+      userDoesNotExistmessage,
     );
   }
 
@@ -243,7 +243,7 @@ const login = asyncHandler(async (req: Request, res: Response) => {
     throw new apiError(
       HttpStatus.UNAUTHORIZED,
       "Password Incorrect",
-      passwordIncorrectMessage
+      passwordIncorrectMessage,
     );
 
   // console.log(userVerified);
@@ -256,7 +256,7 @@ const login = asyncHandler(async (req: Request, res: Response) => {
     throw new apiError(
       HttpStatus.INTERNAL_SERVER_ERROR,
       "Token generation failed",
-      tokenGenerationErrorMessage
+      tokenGenerationErrorMessage,
     );
 
   // Saving refresh token
@@ -278,8 +278,8 @@ const login = asyncHandler(async (req: Request, res: Response) => {
           refreshToken,
           message: "Logged in succesfully",
         },
-        loggedinSuccesMessage
-      )
+        loggedinSuccesMessage,
+      ),
     );
 });
 
@@ -291,7 +291,7 @@ const logout = asyncHandler(async (req: CustomRequest, res: Response) => {
     throw new apiResponse(
       HttpStatus.INTERNAL_SERVER_ERROR,
       "Something went wrong",
-      internalServerErrorMessage
+      internalServerErrorMessage,
     );
 
   // Removing the refresh token
@@ -312,8 +312,8 @@ const logout = asyncHandler(async (req: CustomRequest, res: Response) => {
       new apiResponse(
         HttpStatus.OK,
         "Successfully logged out",
-        loggedOutMessage
-      )
+        loggedOutMessage,
+      ),
     );
 });
 

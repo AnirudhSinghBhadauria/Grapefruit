@@ -17,5 +17,3 @@ const migrationConnection = postgres(process.env.DATABASE_URL!, { max: 1 });
     process.exit(1);
   }
 })();
-
-

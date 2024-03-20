@@ -6,7 +6,7 @@ export const UserPets = z.array(
     lastName: z.string(),
     phone: z.string(),
     petName: z.string(),
-  })
+  }),
 );
 
 // Types
