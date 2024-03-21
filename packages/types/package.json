@@ -14,12 +14,12 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "tsup": "^8.0.2",
     "typescript": "^5.4.2"
   },
   "dependencies": {
     "@chat/drizzle": "workspace:*",
     "drizzle-zod": "^0.5.1",
+    "tsup": "^8.0.2",
     "zod": "^3.22.4"
   }
 }
