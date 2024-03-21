@@ -22,12 +22,12 @@
     "@types/pg": "^8.11.2",
     "dotenv-cli": "^7.3.0",
     "drizzle-kit": "^0.20.14",
+    "tsup": "^8.0.2",
     "typescript": "^5.3.3"
   },
   "dependencies": {
     "drizzle-orm": "^0.29.4",
     "pg": "^8.11.3",
-    "postgres": "^3.4.3",
-    "tsup": "^8.0.2"
+    "postgres": "^3.4.3"
   }
 }

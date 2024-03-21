@@ -10,7 +10,10 @@ services:
     ports:
       - 3000:3000
     networks:
-      - app_network
+      - chat
+    environment:
+      - CONNECT_URL=${CONNECT_URL}
+
   api:
     container_name: api
     build:
@@ -20,10 +23,16 @@ services:
     ports:
       - 8080:8080
     networks:
-      - app_network
+      - chat
+    environment:
+      - PORT=${PORT}
+      - DATABASE_URL=${DATABASE_URL}
+      - SERVER_SECRET_ALGORITHM=${SERVER_SECRET_ALGORITHM}
+      - ACCESS_TOKEN_EXPIRATION_TIME=${ACCESS_TOKEN_EXPIRATION_TIME}
+      - REFRESH_TOKEN_EXPIRATION_TIME=${REFRESH_TOKEN_EXPIRATION_TIME}
+      - ACCESS_TOKEN_SECRET=${ACCESS_TOKEN_SECRET}
+      - REFRESH_TOKEN_SECRET=${REFRESH_TOKEN_SECRET}
 
-# Define a network, which allows containers to communicate
-# with each other, by using their container name as a hostname
 networks:
-  app_network:
+  chat:
     external: true

@@ -34,9 +34,6 @@ export const UserInfoTypes = z.object({
   username: z.string().nullable(),
 });
 
-export const userInsertSchema = createInsertSchema(userRelation);
-export const userSelectSchema = createSelectSchema(userRelation);
-
 export type ExposedUserTypes = z.infer<typeof ExposedUserTypes>;
 export type UserInfoTypes = z.infer<typeof UserInfoTypes>;
 

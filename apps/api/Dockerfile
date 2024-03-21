@@ -3,12 +3,6 @@ FROM node:18-alpine AS base
 FROM base AS builder
 RUN npm install -g pnpm
 
-# SHELL ["/bin/sh", "-c"]
-
-# RUN npm install --global pnpm \
-#     && SHELL=bash pnpm setup \
-#     && source /root/.bashrc
-
 RUN corepack enable && corepack prepare pnpm@latest --activate
 ENV PNPM_HOME=/usr/local/bin
 RUN pnpm add --global @upleveled/preflight@latest
