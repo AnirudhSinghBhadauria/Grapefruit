@@ -1,81 +1,94 @@
-# Turborepo starter
 
-This is an official starter Turborepo.
+---
 
-## Using this example
+# Grapefruit 🍊
 
-Run the following command:
+Grapefruit is a monorepo that combines TypeScript, Zod, Drizzle, PostgreSQL, Next.js, Express.js, and Docker to provide a solid foundation for building scalable, maintainable, and efficient web applications. The "trpc" branch also incorporates tRPC for end-to-end typesafe APIs. Additionally, Grapefruit uses PNPM workspaces for efficient package management.
 
+## Table of Contents
+
+- [Installation](#installation)
+- [Usage](#usage)
+- [Features](#features)
+- [Technologies](#technologies)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Installation
+
+To get started with Grapefruit, follow these steps:
+
+0. First install pnpm if you don't have it already using **npm i -g pnpm**
+1. Clone the repository: `git clone https://github.com/AnirudhSinghBhadauria/Grapefruit.git`
+2. Navigate into the project directory: `cd grapefruit`
+3. Install the dependencies using PNPM: `pnpm install`
+
+## Usage
+
+To start the application, run the following commands:
+
+### Development
+
+Start the application in development mode:
 ```sh
-npx create-turbo@latest
-```
-
-## What's inside?
-
-This Turborepo includes the following packages/apps:
-
-### Apps and Packages
-
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
-
-```
-cd my-turborepo
-pnpm build
-```
-
-### Develop
-
-To develop all apps and packages, run the following command:
-
-```
-cd my-turborepo
 pnpm dev
 ```
-
-### Remote Caching
-
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup), then enter the following commands:
-
+Build the application using Docker Compose:
+```sh
+docker-compose up --build
 ```
-cd my-turborepo
-npx turbo login
+### Production
+
+Build the application:
+```sh
+pnpm build
 ```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
+Run the application:
+```sh
+pnpm dev
 ```
-npx turbo link
+Start the application using Docker Compose:
+```sh
+docker-compose up
 ```
+## Features
 
-## Useful Links
+Here are some of the features of Grapefruit:
 
-Learn more about the power of Turborepo:
+- 🚀 Fast and efficient development experience using Next.js and Turbo Repo
+- 🛡️ Strongly-typed codebase using TypeScript
+- 📝 Schema validation using Zod
+- 💧 Lightweight and type-safe SQL queries using Drizzle ORM
+- 🐳 Dockerized for easy deployment and scaling
+- 🔄 End-to-end typesafe APIs using tRPC (on the "trpc" branch)
+- 📦 Efficient package management using PNPM workspaces
 
-- [Tasks](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
+## Technologies
+
+- [TypeScript](https://www.typescriptlang.org/)
+- [Zod](https://github.com/colinhacks/zod)
+- [Drizzle](https://github.com/drizzle-team/drizzle-orm)
+- [PostgreSQL](https://www.postgresql.org/)
+- [Next.js](https://nextjs.org/)
+- [Express.js](https://expressjs.com/)
+- [Turbo Repo](https://turbo.build/repo)
+- [Docker](https://www.docker.com/)
+- [tRPC](https://trpc.io/) (on the "trpc" branch)
+- [PNPM Workspaces](https://pnpm.io/workspaces)
+
+## Contributing
+
+We welcome contributions from the community! If you'd like to contribute to Grapefruit, please follow these steps:
+
+1. Fork the repository.
+2. Create a new branch for your feature or bug fix.
+3. Make your changes and commit them with clear and descriptive commit messages.
+4. Open a pull request and describe your changes in detail.
+
+You can also open an issue to suggest changes or report bugs.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
+---
